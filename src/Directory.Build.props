@@ -1,0 +1,8 @@
+<Project>
+
+  <PropertyGroup>
+    <PackageOutputPath>$(OutDir)</PackageOutputPath>
+    <RepositoryUrl>https://github.com/terrajobst/Terrajobst.GitHubEvents</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
