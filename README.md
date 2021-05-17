@@ -10,7 +10,40 @@ These libraries help with handling GitHub events in .NET applications.
 Assuming your web hook lives in ASP.NET Core, simply do the following:
 
 1. `dotnet add package Terrajobst.GitHubEvents.AspNetCore`
-2. Modify your `Startup.cs` to add the web hook end point
+2. Add a class that derives from `GitHubEventProcessor` and override any of the
+   virtual methods to handle events from GitHub. To handle any event, simply
+   override `ProcessMessage()`:
+
+    ```C#
+    public sealed class MyGitHubEventProcessor : GitHubEventProcessor
+    {
+        private readonly TelemetryClient _telemetryClient;
+
+        public MyGitHubEventProcessor(TelemetryClient telemetryClient)
+        {
+            _telemetryClient = telemetryClient;
+        }
+
+        public override void ProcessMessage(GitHubEventMessage message)
+        {
+            _telemetryClient.GetMetric("github_" + message.Headers.Event)
+                            .TrackValue(1.0);
+        }
+    }
+    ```
+
+3. Modify your `ConfigureServices()` method to register an implementation for
+   `GitHubEventProcessor`:
+
+    ```C#
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddSingleton<GitHubEventProcessor, MyGitHubEventProcessor>();
+        ...
+    }
+    ```
+4. Modify your `Configure()` method to map the web hook end point:
 
     ```C#
     app.UseEndpoints(endpoints =>
@@ -21,7 +54,7 @@ Assuming your web hook lives in ASP.NET Core, simply do the following:
     });
     ```
 
-Method takes two optional parameters:
+`MapGitHubWebHook()` takes two optional parameters:
 
 * `pattern`. Defaults to `/github-webhook`, the URL of the end point to use for
   GitHub.
