@@ -56,13 +56,13 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("added"):
+                case "added":
                     ProcessRepoInstallationMessage(message, installation, sender, GitHubEventRepoInstallationAction.Added);
                     break;
-                case ("removed"):
+                case "removed":
                     ProcessRepoInstallationMessage(message, installation, sender, GitHubEventRepoInstallationAction.Removed);
                     break;
-                case ("transferred"):
+                case "transferred":
                     ProcessRepoInstallationMessage(message, installation, sender, GitHubEventRepoInstallationAction.Transferred);
                     break;
             }
@@ -78,22 +78,22 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("created"):
+                case "created":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Created);
                     break;
-                case ("deleted"):
+                case "deleted":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Deleted);
                     break;
-                case ("archived"):
+                case "archived":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Archived);
                     break;
-                case ("unarchived"):
+                case "unarchived":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Unarchived);
                     break;
-                case ("publicized"):
+                case "publicized":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Publicized);
                     break;
-                case ("privatized"):
+                case "privatized":
                     ProcessRepoMessage(message, repository, GitHubEventRepoAction.Privatized);
                     break;
             }
@@ -109,13 +109,13 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("created"):
+                case "created":
                     ProcessLabelMessage(message, repository, label, GitHubEventLabelAction.Created);
                     break;
-                case ("edited"):
+                case "edited":
                     ProcessLabelMessage(message, repository, label, GitHubEventLabelAction.Edited);
                     break;
-                case ("deleted"):
+                case "deleted":
                     ProcessLabelMessage(message, repository, label, GitHubEventLabelAction.Deleted);
                     break;
             }
@@ -131,19 +131,19 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("created"):
+                case "created":
                     ProcessMilestoneMessage(message, repository, milestone, GitHubEventMilestoneAction.Created);
                     break;
-                case ("edited"):
+                case "edited":
                     ProcessMilestoneMessage(message, repository, milestone, GitHubEventMilestoneAction.Edited);
                     break;
-                case ("closed"):
+                case "closed":
                     ProcessMilestoneMessage(message, repository, milestone, GitHubEventMilestoneAction.Closed);
                     break;
-                case ("opened"):
+                case "opened":
                     ProcessMilestoneMessage(message, repository, milestone, GitHubEventMilestoneAction.Opened);
                     break;
-                case ("deleted"):
+                case "deleted":
                     ProcessMilestoneMessage(message, repository, milestone, GitHubEventMilestoneAction.Deleted);
                     break;
             }
@@ -159,46 +159,46 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("opened"):
+                case "opened":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Opened);
                     break;
-                case ("reopened"):
+                case "reopened":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Reopened);
                     break;
-                case ("closed"):
+                case "closed":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Closed);
                     break;
-                case ("deleted"):
+                case "deleted":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Deleted);
                     break;
-                case ("edited"):
+                case "edited":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Edited);
                     break;
-                case ("assigned"):
+                case "assigned":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Assigned);
                     break;
-                case ("unassigned"):
+                case "unassigned":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Unassigned);
                     break;
-                case ("labeled"):
+                case "labeled":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Labeled);
                     break;
-                case ("unlabeled"):
+                case "unlabeled":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Unlabeled);
                     break;
-                case ("milestoned"):
+                case "milestoned":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Milestoned);
                     break;
-                case ("demilestoned"):
+                case "demilestoned":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Demilestoned);
                     break;
-                case ("locked"):
+                case "locked":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Locked);
                     break;
-                case ("unlocked"):
+                case "unlocked":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Unlocked);
                     break;
-                case ("transferred"):
+                case "transferred":
                     ProcessIssueMessage(message, repository, issue, GitHubEventIssueAction.Transferred);
                     break;
             }
@@ -214,13 +214,13 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("created"):
+                case "created":
                     ProcessIssueCommentMessage(message, repository, issue, comment, GitHubEventCommentAction.Created);
                     break;
-                case ("edited"):
+                case "edited":
                     ProcessIssueCommentMessage(message, repository, issue, comment, GitHubEventCommentAction.Edited);
                     break;
-                case ("deleted"):
+                case "deleted":
                     ProcessIssueCommentMessage(message, repository, issue, comment, GitHubEventCommentAction.Deleted);
                     break;
             }
@@ -236,35 +236,35 @@ namespace Terrajobst.GitHubEvents
         {
             switch (message.Body.Action)
             {
-                case ("opened"):
+                case "opened":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Opened);
                     break;
-                case ("reopened"):
+                case "reopened":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Reopened);
                     break;
-                case ("closed"):
+                case "closed":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Closed);
                     break;
-                case ("edited"):
+                case "edited":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Edited);
                     break;
-                case ("assigned"):
+                case "assigned":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Assigned);
                     break;
-                case ("unassigned"):
+                case "unassigned":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Unassigned);
                     break;
-                case ("labeled"):
+                case "labeled":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Labeled);
                     break;
-                case ("unlabeled"):
+                case "unlabeled":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Unlabeled);
                     break;
                 // For some reason, GitHub doesn't seem to send milestoned/demilestoned events for PRs, they come in as issue events.
-                case ("locked"):
+                case "locked":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Locked);
                     break;
-                case ("unlocked"):
+                case "unlocked":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Unlocked);
                     break;
             }
