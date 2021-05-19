@@ -11,6 +11,8 @@
         Labeled,
         Unlabeled,
         Locked,
-        Unlocked
+        Unlocked,
+        ReadyForReview,
+        ConvertedToDraft
     }
 }

@@ -267,6 +267,12 @@ namespace Terrajobst.GitHubEvents
                 case "unlocked":
                     ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.Unlocked);
                     break;
+                case "ready_for_review":
+                    ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.ReadyForReview);
+                    break;
+                case "converted_to_draft":
+                    ProcessPullRequestMessage(message, repository, pullRequest, GitHubEventPullRequestAction.ConvertedToDraft);
+                    break;
             }
         }
 
