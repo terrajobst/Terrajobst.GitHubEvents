@@ -7,7 +7,7 @@ namespace Terrajobst.GitHubEvents
 {
     public sealed class GitHubEventChanges
     {
-        public GitHubEventRepository NewIssue { get; set; }
+        public GitHubEventIssue NewIssue { get; set; }
         public GitHubEventRepository NewRepository { get; set; }
 
         [JsonExtensionData]
