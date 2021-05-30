@@ -1,8 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Terrajobst.GitHubEvents
@@ -20,7 +19,7 @@ namespace Terrajobst.GitHubEvents
         public GitHubEventLabel Label { get; set; }
         public GitHubEventUser Sender { get; set; }
         public GitHubEventInstallation Installation { get; set; }
-        public JObject Changes { get; set; }
+        public GitHubEventChanges Changes { get; set; }
 
         public static GitHubEventBody Parse(string json)
         {
@@ -72,9 +71,23 @@ namespace Terrajobst.GitHubEvents
 
             if (Changes is not null)
             {
-                var properties = Changes.Properties().Select(p => p.Name);
-                var propertyList = string.Join(",", properties);
-                sb.Append($", Changes={propertyList}");
+                var properties = new List<string>();
+
+                if (Changes.NewIssue is not null)
+                    properties.Add("new_issue");
+
+                if (Changes.NewRepository is not null)
+                    properties.Add("new_repository");
+
+                if (Changes.AdditionalData is not null)
+                    properties.AddRange(Changes.AdditionalData.Keys);
+
+                if (properties.Count > 0)
+                {
+                    properties.Sort();
+                    var propertyList = string.Join(",", properties);
+                    sb.Append($", Changes={propertyList}");
+                }
             }
 
             return sb.ToString();
