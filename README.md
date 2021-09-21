@@ -10,12 +10,11 @@ These libraries help with handling GitHub events in .NET applications.
 Assuming your web hook lives in ASP.NET Core, simply do the following:
 
 1. `dotnet add package Terrajobst.GitHubEvents.AspNetCore`
-2. Add a class that derives from `GitHubEventProcessor` and override any of the
-   virtual methods to handle events from GitHub. To handle any event, simply
-   override `ProcessMessage()`:
+2. Add a class that implements from `IGitHubEventProcessor` to handle events
+   from GitHub:
 
     ```C#
-    public sealed class MyGitHubEventProcessor : GitHubEventProcessor
+    public sealed class MyGitHubEventProcessor : IGitHubEventProcessor
     {
         private readonly TelemetryClient _telemetryClient;
 
@@ -24,22 +23,22 @@ Assuming your web hook lives in ASP.NET Core, simply do the following:
             _telemetryClient = telemetryClient;
         }
 
-        public override void ProcessMessage(GitHubEventMessage message)
+        public void Process(GitHubEventMessage message)
         {
-            _telemetryClient.GetMetric("github_" + message.Headers.Event)
+            _telemetryClient.GetMetric("github_" + message.Kind)
                             .TrackValue(1.0);
         }
     }
     ```
 
 3. Modify your `ConfigureServices()` method to register an implementation for
-   `GitHubEventProcessor`:
+   `IGitHubEventProcessor`:
 
     ```C#
     public void ConfigureServices(IServiceCollection services)
     {
         ...
-        services.AddSingleton<GitHubEventProcessor, MyGitHubEventProcessor>();
+        services.AddSingleton<IGitHubEventProcessor, MyGitHubEventProcessor>();
         ...
     }
     ```
