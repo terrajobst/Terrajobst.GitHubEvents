@@ -6,6 +6,22 @@ namespace Terrajobst.GitHubEvents;
 
 public sealed class GitHubEventMessage
 {
+    public static GitHubEventMessage FromGitHubActions()
+    {
+        var eventName = Environment.GetEnvironmentVariable("GITHUB_EVENT_NAME");
+        var eventPath = Environment.GetEnvironmentVariable("GITHUB_EVENT_PATH");
+
+        if (!string.IsNullOrEmpty(eventName) && !string.IsNullOrEmpty(eventPath))
+        {
+            var eventBodyJson = File.ReadAllText(eventPath);
+            var eventBody = GitHubEventBody.Parse(eventBodyJson);
+            var eventMessage = Parse(eventName, eventBodyJson);
+            return eventMessage;
+        }
+
+        return null;
+    }
+
     public GitHubEventMessage(string userAgent,
                               string delivery,
                               string @event,
@@ -83,6 +99,19 @@ public sealed class GitHubEventMessage
                 }
             }
         }
+
+        return Parse(headers, body);
+    }
+
+    public static GitHubEventMessage Parse(string @event, string body)
+    {
+        ArgumentNullException.ThrowIfNull(@event);
+        ArgumentNullException.ThrowIfNull(body);
+
+        var headers = new Dictionary<string, StringValues>()
+        {
+            {"X-GitHub-Event", @event }
+        };
 
         return Parse(headers, body);
     }
