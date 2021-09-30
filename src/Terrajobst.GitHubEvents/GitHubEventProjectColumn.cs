@@ -8,6 +8,6 @@ public sealed class GitHubEventProjectColumn
     public int Id { get; set; }
     public string NodeId { get; set; }
     public string Name { get; set; }
-    public DateTime Created_at { get; set; }
-    public DateTime Updated_at { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

@@ -2,5 +2,5 @@
 
 public interface IGitHubEventProcessor
 {
-    void Process(GitHubEventMessage message);
+    void Process(GitHubEvent message);
 }

@@ -1,50 +1,53 @@
 ﻿namespace Terrajobst.GitHubEvents;
 
 [Flags]
-public enum GitHubEventMessageKind
+public enum GitHubEventKind
 {
     Unknown = 0,
 
-    // Event (lower 4 bits)
+    // Event (lower 16 bits)
 
-    EventInstallation  = 1,
-    EventRepository    = 2,
-    EventLabel         = 3,
-    EventMilestone     = 4,
-    EventIssue         = 5,
-    EventPullRequest   = 6,
-    EventComment       = 7,   
-    EventProject       = 8,
-    EventProjectColumn = 9,
-    EventProjectCard   = 10,
+    EventPush             =  1,
+    EventWorkflowDispatch =  2,
+    EventSchedule         =  3,
+    EventInstallation     =  4,
+    EventRepository       =  5,
+    EventLabel            =  6,
+    EventMilestone        =  7,
+    EventIssue            =  8,
+    EventPullRequest      =  9,
+    EventComment          = 10,
+    EventProject          = 11,
+    EventProjectColumn    = 12,
+    EventProjectCard      = 13,
 
-    // Actions
+    // Actions (upper 16 bits)
 
-    ActionAdded            = 1 << 4,
-    ActionRemoved          = 2 << 4,
-    ActionTransferred      = 3 << 4,
-    ActionCreated          = 4 << 4,
-    ActionDeleted          = 5 << 4,
-    ActionRenamed          = 6 << 4,
-    ActionArchived         = 7 << 4,
-    ActionUnarchived       = 8 << 4,
-    ActionPublicized       = 9 << 4,
-    ActionPrivatized       = 10 << 4,
-    ActionEdited           = 11 << 4,
-    ActionClosed           = 12 << 4,
-    ActionOpened           = 13 << 4,
-    ActionReopened         = 14 << 4,
-    ActionAssigned         = 15 << 4,
-    ActionUnassigned       = 16 << 4,
-    ActionLabeled          = 17 << 4,
-    ActionUnlabeled        = 18 << 4,
-    ActionMilestoned       = 19 << 4,
-    ActionDemilestoned     = 20 << 4,
-    ActionLocked           = 21 << 4,
-    ActionUnlocked         = 22 << 4,
-    ActionReadyForReview   = 23 << 4,
-    ActionConvertedToDraft = 24 << 4,
-    ActionMoved            = 25 << 4,
+    ActionAdded            = 1 << 16,
+    ActionRemoved          = 2 << 16,
+    ActionTransferred      = 3 << 16,
+    ActionCreated          = 4 << 16,
+    ActionDeleted          = 5 << 16,
+    ActionRenamed          = 6 << 16,
+    ActionArchived         = 7 << 16,
+    ActionUnarchived       = 8 << 16,
+    ActionPublicized       = 9 << 16,
+    ActionPrivatized       = 10 << 16,
+    ActionEdited           = 11 << 16,
+    ActionClosed           = 12 << 16,
+    ActionOpened           = 13 << 16,
+    ActionReopened         = 14 << 16,
+    ActionAssigned         = 15 << 16,
+    ActionUnassigned       = 16 << 16,
+    ActionLabeled          = 17 << 16,
+    ActionUnlabeled        = 18 << 16,
+    ActionMilestoned       = 19 << 16,
+    ActionDemilestoned     = 20 << 16,
+    ActionLocked           = 21 << 16,
+    ActionUnlocked         = 22 << 16,
+    ActionReadyForReview   = 23 << 16,
+    ActionConvertedToDraft = 24 << 16,
+    ActionMoved            = 25 << 16,
 
     // Compound
 
@@ -111,7 +114,7 @@ public enum GitHubEventMessageKind
     ProjectColumnCreated = EventProjectColumn | ActionCreated,
     ProjectColumnEdited = EventProjectColumn | ActionEdited,
     ProjectColumnDeleted = EventProjectColumn | ActionDeleted,
-    
+
     ProjectCardCreated = EventProjectCard | ActionCreated,
     ProjectCardDeleted = EventProjectCard | ActionDeleted,
     ProjectCardMoved = EventProjectCard | ActionMoved,

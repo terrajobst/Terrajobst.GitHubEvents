@@ -8,6 +8,17 @@ namespace Terrajobst.GitHubEvents;
 public sealed class GitHubEventBody
 {
     public string Action { get; set; }
+    public string After { get; set; }
+    public string BaseRef { get; set; }
+    public string Before { get; set; }
+    public string Compare { get; set; }
+    public bool Created { get; set; }
+    public bool Deleted { get; set; }
+    public bool Forced { get; set; }
+    public string Ref { get; set; }
+    public GitHubEventCommit[] Commits { get; set; }
+    public GitHubEventCommit HeadCommit { get; set; }
+    public GitHubEventAuthor Pusher { get; set; }
     public GitHubEventOrganization Organization { get; set; }
     public GitHubEventRepository Repository { get; set; }
     public GitHubEventIssue Issue { get; set; }
@@ -20,6 +31,7 @@ public sealed class GitHubEventBody
     public GitHubEventMilestone Milestone { get; set; }
     public GitHubEventLabel Label { get; set; }
     public GitHubEventUser Sender { get; set; }
+    public GitHubEventEnterprise Enterprise { get; set; }
     public GitHubEventInstallation Installation { get; set; }
     public GitHubEventChanges Changes { get; set; }
 
@@ -30,6 +42,9 @@ public sealed class GitHubEventBody
             ContractResolver = new DefaultContractResolver
             {
                 NamingStrategy = new SnakeCaseNamingStrategy()
+            },
+            Converters = {
+                new GitHubDateTimeConverter()
             }
         };
 

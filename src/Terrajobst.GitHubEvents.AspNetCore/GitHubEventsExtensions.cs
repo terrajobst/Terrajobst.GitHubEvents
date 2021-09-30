@@ -46,7 +46,7 @@ public static class GitHubEventsExtensions
             try
             {
                 var headers = context.Request.Headers.ToDictionary(kv => kv.Key, kv => kv.Value);
-                var message = GitHubEventMessage.Parse(headers, body);
+                var message = GitHubEvent.Parse(headers, body);
 
                 var service = context.RequestServices.GetRequiredService<IGitHubEventProcessor>();
                 service.Process(message);
