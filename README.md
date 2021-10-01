@@ -5,6 +5,19 @@
 
 These libraries help with handling GitHub events in .NET applications.
 
+## Usage in GitHub Actions
+
+If you're running inside of GitHub Actions, you can simply access the event data
+that triggered the workflow by doing this:
+
+```C#
+GitHubEvent gitHubEvent = GitHubEvent.FromGitHubActions();
+if (gitHubEvent is not null)
+{
+    // Triggered from inside GitHub Actions
+}
+```
+
 ## Usage in ASP.NET Core
 
 Assuming your web hook lives in ASP.NET Core, simply do the following:
@@ -23,9 +36,9 @@ Assuming your web hook lives in ASP.NET Core, simply do the following:
             _telemetryClient = telemetryClient;
         }
 
-        public void Process(GitHubEventMessage message)
+        public void Process(GitHubEvent @event)
         {
-            _telemetryClient.GetMetric("github_" + message.Kind)
+            _telemetryClient.GetMetric("github_" + @event.Kind)
                             .TrackValue(1.0);
         }
     }
